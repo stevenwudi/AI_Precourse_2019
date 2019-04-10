@@ -1,0 +1,113 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifcvprfinal\pagestyle{empty}\fi
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Ring loss: Convex Feature Normalization for Face Recognition}
+
+\author{Yutong Zheng, Dipan K. Pal and Marios Savvides\\
+Department of Electrical and Computer Engineering\\
+Carnegie Mellon University\\
+{\tt\small \{yutongzh, dipanp, marioss\}@andrew.cmu.edu}
+}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+We motivate and present Ring loss, a simple and elegant
+feature normalization approach for deep networks designed
+to augment standard loss functions such as Softmax. We
+argue that deep feature normalization is an important aspect of supervised classification problems where we require
+the model to represent each class in a multi-class problem
+equally well. The direct approach to feature normalization through the hard normalization operation results in a
+non-convex formulation. Instead, Ring loss applies soft normalization, where it gradually learns to constrain the norm
+to the scaled unit circle while preserving convexity leading
+to more robust features. We apply Ring loss to large-scale
+face recognition problems and present results on LFW, the
+challenging protocols of IJB-A Janus, Janus CS3 (a superset of IJB-A Janus), Celebrity Frontal-Profile (CFP) and
+MegaFace with 1 million distractors. Ring loss outperforms
+strong baselines, matches state-of-the-art performance on
+IJB-A Janus and outperforms all other results on the challenging Janus CS3 thereby achieving state-of-the-art. We
+also outperform strong baselines in handling extremely low
+resolution face matching.
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+\section{Introduction}
+
+Deep learning has demonstrated impressive performance
+on a variety of tasks. Arguably the most important task, that
+of supervised classification, has led to many advancements.
+Notably, the use of deeper structures [21, 23, 7] and more
+powerful loss functions [6, 19, 26, 24, 15] have resulted
+in far more robust feature representations. There has also
+been more attention on obtaining better-behaved gradients
+through normalization of batches or weights [9, 1, 18].
+
+......
+
+%------------------------------------------------------------------------
+\section{citation}
+Reference\cite{zheng2018ring}
+
+%------------------------------------------------------------------------
+\section{math formula}
+$ L_{SM} = -log\frac{exp\, \omega _{k} F\left ( x_{i} \right )}{\sum ^{K}_{k'=1} exp\, \omega _{k'} F\left ( x_{i} \right )} F $
+
+%------------------------------------------------------------------------
+\section{table}
+
+\begin{table}[h]
+\begin{tabular}{|l|c|r|}
+\hline
+Method&MegaFace&CFP\\
+\hline
+SM&56.36&55.86\\
+\hline
+\end{tabular}
+\end{table}
+
+%------------------------------------------------------------------------
+\section{image}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{1.png}  
+	\caption{(a) Features trained using Softmax (b) Features trained using Ring loss}
+\end{figure}
+
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{cite}
+}
+
+\end{document}
