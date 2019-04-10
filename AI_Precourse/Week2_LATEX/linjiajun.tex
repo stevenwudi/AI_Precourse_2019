@@ -1,0 +1,89 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+%\ifcvprfinal\pagestyle{empty}\fi
+\setcounter{page}{4321}
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Detecting Faces Using Inside Cascaded Contextual CNN}
+
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+   The ABSTRACT is to be in fully-justified italicized text, at the top
+   of the left-hand column, below the author and affiliation
+   information. Use the word ``Abstract'' as the title, in 12-point
+   Times, boldface type, centered relative to the column, initially
+   capitalized. The abstract is to be in 10-point, single-spaced type.
+   Leave two blank lines after the Abstract, then begin the main text.
+   Look at previous CVPR abstracts to get a feel for style and length.
+\end{abstract}
+
+\subsection{Image}
+\includegraphics[width = .4\textwidth]{a.jpg}
+
+\subsection{Table}
+\begin{tabular}{|l|c|r|}
+\hline
+col1 & col2 & col3\\
+\hline
+1.1 & 1.2 & 1.3\\
+\hline
+2.1 & 2.2 & 2.3 \\
+\hline
+\end{tabular}
+
+\subsection{formula}
+$$h(\theta) = \sum_{j = 0} ^n \theta_j x_j$$
+%-------------------------------------------------------------------------
+\subsection{References}
+[1] N. Alejandro, Y. Kaiyu, and D. Jia. Stacked hourglass networks for human pose estimation. In ECCV, 2016.
+[2] A. Bulat and G. Tzimiropoulos. Human pose estimation via
+convolutional part heatmap regression. In ECCV, 2016.\newline
+[3] J. Carreira, P. Agrawal, K. Fragkiadaki, and J. Malik. Human
+pose estimation with iterative error feedback. In CVPR, June
+2016.\newline
+[4] D. Chen, S. Ren, Y. Wei, X. Cao, and J. Sun. Joint cascade face detection and alignment. In ECCV, pages 109–122.
+Springer, 2014.\newline
+[5] R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic
+segmentation. In CVPR, pages 580–587, 2014.\newline
+[6] K. He, X. Zhang, S. Ren, and J. Sun. Delving deep into
+rectifiers: Surpassing human-level performance on imagenet
+classification. In ICCV, pages 1026–1034, 2015.\newline
+[7] V. Jain and E. G. Learned-Miller. Fddb: A benchmark for
+face detection in unconstrained settings. UMass Amherst
+Technical Report, 2010.\newline
+[8] A. Krizhevsky, I. Sutskever, and G. E. Hinton. Imagenet
+classification with deep convolutional neural networks. In
+NIPS, pages 1097–1105, 2012.\newline
+[9] V. Kumar, A. Namboodiri, and C. Jawahar. Visual phrases for exemplar face detection. In ICCV, pages 1994–2002,
+2015.\newline
+[10] Y. LeCun, B. Boser, J. S. Denker, D. Henderson, R. E.
+Howard, W. Hubbard, and L. D. Jackel. Backpropagation
+applied to handwritten zip code recognition. Neural computation, 1(4):541–551, 1989.
+
+
+\end{document}
