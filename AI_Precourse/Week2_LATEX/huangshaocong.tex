@@ -1,0 +1,137 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifcvprfinal\pagestyle{empty}\fi
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Face detection in a video sequence - a temporal approach}
+
+\author{K. Mikolajczyk\\
+INRIA\\
+Rh\^{o}ne-Alpes GRAVIR-CNRS, 655 av. de l’Europe, 38330 Montbonnot, France\\
+{\tt\small Krystian.Mikolajczyk@inrialpes.fr}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+R. Choudhury\\
+{\tt\small Ragini.Choudhury@inrialpes.fr}
+\and
+C. Schmid\\
+{\tt\small Cordelia.Schmid@inrialpes.fr}
+}
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+This paper presents a new method for detecting faces in
+a video sequence where detection is not limited to frontal
+views. The three novel contributions of the paper are :
+1) Accumulation of probabilities of detection over a sequence. This allows to obtain a coherent detection over
+time as well as independence from thresholds. 2) Prediction of the detection parameters which are position, scale
+and pose. This guarantees the accuracy of accumulation as
+well as a continuous detection. 3) The way pose is represented. The representation is based on the combination of
+two detectors, one for frontal views and one for profiles.
+Face detection is fully automatic and is based on the
+method developed by Schneiderman. It uses local histograms of wavelet coefficients represented with respect to
+a coordinate frame fixed to the object.
+
+......
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+\section{Introduction}
+
+In the context of video structuring, indexing and visual
+surveillance, faces are the most important “basic units”. If
+the application is, for example, to identify an actor in a
+video clip, face detection is required as the first step.
+
+Existing approaches either detect faces for every frame
+without using the temporal information or they detect a face
+in the first frame and then track the face through the sequence with a separate algorithm. This paper presents a
+novel approach which integrates detection and tracking in
+a unified probabilistic framework. It uses the temporal relationships between the frames to detect human faces in a
+video sequence, instead of detecting them in each frame independently.
+
+......
+
+{\bf The rest of the paper is skipped here, and the text sections below are the assignments for the Week 2.}
+%-------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------
+\section{A exemple of citation}
+
+Here is a exemple of citation\cite{Mikolajczyk2001Face}.
+
+
+%------------------------------------------------------------------------
+\section{One math formula}
+
+$Var(S) = \sum_{i=1}^S w_i{S}^2-{Mean(S)}^2$
+
+%-------------------------------------------------------------------------
+\section{One table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Method & XXXX \\
+\hline
+Theirs & XXXX \\
+Ours & XXXX\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Example of table.}
+\end{table}
+
+
+
+%-------------------------------------------------------------------------
+\section{One image}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{02.png}
+\end{center}
+   \caption{Example of image.}
+\end{figure}
+
+%-------------------------------------------------------------------------
+
+
+%------------------------------------------------------------------------
+
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{egbib}
+}
+
+\end{document}

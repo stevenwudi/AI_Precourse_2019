@@ -1,0 +1,122 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifcvprfinal\pagestyle{empty}\fi
+\begin{document}
+%%%%%%%%% TITLE
+\title{Learning Deep Models for Face Anti-Spoofing: Binary or Auxiliary Supervision }
+
+\author{Yaojie Liu* \quad Amin Jourabloo* \quad Xiaoming Liu\\
+Department of Computer Science and Engineering\\
+Michigan State University,East Lansing MI 48824\\
+{\tt\small \{liuyaoj1,jourablo,liuxm\}@msu.edu}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+}
+
+
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+   Face anti-spoofing is crucial to prevent face recognition
+systems from a security breach. Previous deep learning ap-
+proaches formulate face anti-spoofing as a binary classifi-
+cation problem. Many of them struggle to grasp adequate
+spoofing cues and generalize poorly. In this paper, we ar-
+gue the importance of auxiliary supervision to guide the
+learning toward discriminative and generalizable cues. A
+CNN-RNN model is learned to estimate the face depth with
+pixel-wise supervision, and to estimate rPPG signals with
+sequence-wise supervision. The estimated depth and rPPG
+are fused to distinguish live vs. spoof faces. Further, we
+introduce a new face anti-spoofing database that covers a
+large range of illumination, subject, and pose variations.
+Experiments show that our model achieves the state-of-the-
+art results on both intra- and cross-database testing.
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+\section{Introduction}
+With applications in phone unlock, access control, and
+security, biometric systems are widely used in our daily
+lives, and face is one of the most popular biometric modali-
+ties. While face recognition systems gain popularity, attack-
+ers present face spoofs (i.e., presentation attacks, PA) to the
+system and attempt to be authenticated as the genuine user.
+The face PA include printing a face on paper (print attack),
+replaying a face video on a digital device (replay attack),
+wearing a mask (mask attack), etc. To counteract PA, face
+anti-spoofing techniques [~\cite{chetty2006multi},~\cite{frischholz2000biold},~\cite{frischholz2003avoiding},~\cite{li2004live}] 
+are developed to
+detect PA prior to a face image being recognized. There-
+fore, face anti-spoofing is vital to ensure that face recogni-
+tion systems are robust to PA and safe to use.\\
+......
+\section{One math formula,table and image}
+\begin{equation}
+\int \frac{d x}{\sqrt{x^2 \pm a^2}} =ln (x+ \sqrt{x^2 \pm a^2} )+C\\
+\end{equation}
+
+
+
+%-------------------------------------------------------------------------
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Prot. & Method &APCER(\%)&BPCER(\%)&ACER(\%) \\
+\hline\hline
+&CPqD & 2.9&10.8&.9\\ \cline{2-5}
+1&GRADIANT &1.3 &12.5&6.9 \\ \cline{2-5}
+ &Proposed method&1.6&1.6&1.6\\
+\hline
+\end{tabular}
+\end{center}
+\caption{The intra-testing results on four protocols of Oulu.}
+\end{table}
+
+
+\begin{figure}[t]
+\begin{center}
+%\fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+\includegraphics[width=0.8\linewidth]{figure.png}
+\end{center}
+   \caption{The statistics of the subjects in the SiW database. Left
+		side: The histogram shows the distribution of the face sizes.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+
+
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{egbib}
+}
+
+\end{document}
