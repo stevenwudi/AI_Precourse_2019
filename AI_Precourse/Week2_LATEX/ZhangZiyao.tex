@@ -1,0 +1,158 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{244} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+%\ifcvprfinal\pagestyle{empty}\fi
+\setcounter{page}{1}
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Real-Time Rotation-Invariant Face Detection with\\
+Progressive Calibration Networks}
+
+\author{Xuepeng Shi\\
+{\tt\small xuepeng.shi@vipl.ict.ac.cn}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Shiguang Shan\\
+{\tt\small shiguang.shan@vipl.ict.ac.cn}
+}
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+   Rotation-invariant face detection, i.e. detecting faces
+   with arbitrary rotation-in-plane (RIP) angles, is widely required
+   in unconstrained applications but still remains as a
+   challenging task, due to the large variations of face appearances.
+   Most existing methods compromise with speed or
+   accuracy to handle the large RIP variations.To address
+   this problem more efficiently, we propose Progressive Calibration
+   Networks (PCN) to perform rotation-invariant face
+   detection in a coarse-to-fine manner. PCN consists of three
+   stages, each of which not only distinguishes the faces from
+   non-faces, but also calibrates the RIP orientation of each
+   face candidate to upright progressively. By dividing the
+   calibration process into several progressive steps and only
+   predicting coarse orientations in early stages, PCN can
+   achieve precise and fast calibration. By performing binary
+   classification of face vs. non-face with gradually decreasing
+   RIP ranges, PCN can accurately detect faces with full
+   360$^\circ$ RIP angles. Such designs lead to a real-time rotationinvariant
+   face detector. The experiments on multi-oriented
+   FDDB and a challenging subset of WIDER FACE containing
+   rotated faces in the wild show that our PCN achieves
+   quite promising performance. A demo of PCN can be available
+   at \url{https://github.com/Jack-CV/PCN}.
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+\section{Introduction}
+
+Face detection serves as an important component in computer
+vision systems which aim to extract information from
+face images. Practical applications, such as face recognition
+and face animation, all need to quickly and accurately detect
+faces on input images in advance. Same as many other
+vision tasks, the performance of face detection has been
+substantially improved by Convolutional Neural Network(CNN)
+[\cite{Alpher02},\cite{Alpher03}].The CNN-based
+detectors enjoy the natural advantage of strong capability
+in non-linear feature learning. However, most works focus
+on designing an effective detector for generic faces without
+considerations for specific scenarios, such as detecting faces
+with full rotation-in-plane (RIP) angles as shown in Figure
+1. They become less satisfactory in such complex applications.
+Face detection in full RIP, i.e. rotation-invariant
+face detection, is quite challenging, because faces can be
+captured almost from any RIP angle, leading to significant
+divergence in face appearances. An accurate rotationinvariant
+face detector can greatly boost the performance of
+subsequent process, e.g. face alignment and face recognition.
+
+\begin{figure}[t]
+\begin{center}
+%\fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+   \includegraphics[width=0.8\linewidth]{figure1.jpg}
+\end{center}
+   \caption{Many complex situations need rotation-invariant face detectors.
+The face boxes are the outputs of our detector, and the blue
+line indicates the orientation of faces.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+%-------------------------------------------------------------------------
+\subsection{PCN-1 in 1st stage}
+For each input window $\mathit{x}$, PCN-1 has three objectives:
+face or non-face classification, bounding box regression,
+and calibration, formulated as follows:
+\begin{equation}
+[f,g,t] = F_{1}(x)
+\end{equation}
+where $\mathit{F_{1}}$ is the detector in the first stage structured with a
+small CNN. The $\mathit{f}$ is face confidence score, $\mathit{t}$ is a vector
+representing the prediction of bounding box regression, and
+$\mathit{g}$ is orientation score.
+The first objective, which is also the primary objective,
+aims for distinguishing faces from non-faces with softmax
+loss as follows:
+\begin{equation}
+L_{cls} = ylogf + (1-y)log(1-f)
+\end{equation}
+where $\mathit{y}$ equals 1 if $\mathit{x}$ is face, otherwise is 0.
+
+\begin{table*}[!htbp]
+\centering
+\begin{tabular}{c|c|c|c}
+\hline
+\multirow{2}*{Method}&Recall rate at 100 FP on FDDB&Speed&\multirow{2}*{Model Size}\\
+\cline{2-3}
+&Up\qquad Down\qquad Left\qquad Right\qquad Ave&CPU\qquad GPU\\
+\hline
+Divide-and-Conquer &85.5\qquad 85.2\qquad 85.5\qquad 85.6\qquad 85.5&15FPS\qquad 20FPS&2.2M\\
+Rotation Router &85.4\qquad 84.7\qquad 84.6\qquad 84.5\qquad 84.8 &12FPS\qquad 15FPS &2.5M\\
+Cascade CNN &85.0\qquad 84.2\qquad 84.7\qquad 85.8\qquad 84.9 &31FPS\qquad 67FPS &4.2M\\
+Cascade CNN &85.8\qquad 85.0\qquad 84.9\qquad 86.2\qquad 85.5 &16FPS\qquad 30FPS &4.7M\\
+SSD500 &86.3\qquad 86.5\qquad 85.5\qquad 86.1\qquad 86.1 &1FPS\qquad 20FPS &95M\\
+Faster R-CNN &84.2\qquad 82.5\qquad 81.9\qquad 82.1\qquad 82.7 &1FPS\qquad 20FPS &350M\\
+Faster R-CNN &87.0\qquad 86.5\qquad 85.2\qquad 86.1\qquad 86.2 &0.5FPS\qquad 10FPS &547M\\
+R-FCN &87.1\qquad 86.6\qquad 85.9\qquad 86.0\qquad 86.4 &0.8FPS\qquad 15FPS &123M\\
+\hline
+PCN (ours) &87.8\qquad 87.5\qquad 87.1\qquad 87.3\qquad 87.4\qquad &29FPS\qquad 63FPS &4.2M\\
+\hline
+\end{tabular}
+\caption{Speed and accuracy comparison between different methods. The FDDB recall rate (\%) is at 100 false positives.}
+\end{table*}
+
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{egbib}
+}
+
+\end{document}
