@@ -1,2 +1,0 @@
-﻿**Turery**
-_Turery_
