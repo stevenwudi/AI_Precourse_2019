@@ -7,15 +7,15 @@
 
 \begin{document}
 \title{\LaTeX\ Pose-Robust Face Recognition via Deep Residual Equivariant Mapping}
-\author{Kaidi Cao  Yu Rong  Cheng Li\\
+\author{ Cheng Li\\
 \\
 \\
-{}
+{chengli@sensettime.com}
 \and
 Xiaoou Tang\\
-Chen Change Loy\\
-First line of institution2 address\\
-{\tt\small secondauthor@i2.org}
+\\
+\\
+{\tt\small xtang@ie.cuhk.edu.hk}
 }
 %\author{Kaidi Cao \and Yu Rong \and Cheng Li \and Xiaoou Tang \and Chen Change Loy
 
@@ -24,5 +24,31 @@ First line of institution2 address\\
 \begin{abstract}
 Face recognition achieves exceptional success thanks to the emergence of deep learning. However, many contemporary face recognition models still perform relatively poor in processing profile faces compared to frontal faces. A key reason is that the number of frontal and profile training faces are highly imbalanced - there are extensively more frontal training samples compared to profile ones. In addition, it is intrinsically hard to learn a deep representation that is geometrically invariant to large pose variations. In this study, we hypothesize that there is an inherent mapping between frontal and profile faces, and consequently, their discrepancy in the deep representation space can be bridged by an equivariant mapping. To exploit this mapping, we formulate a novel Deep Residual EquivAriant Mapping (DREAM) block, which is capable of adaptively adding residuals to the input deep representation to transform a profile face representation to a canonical pose that simplifies recognition. The DREAM block consistently enhances the performance of profile face recognition for many strong deep networks, including ResNet models, without deliberately augmenting training data of profile faces. The block is easy to use, light-weight, and can be implemented with a negligible computational overhead.
 \end{abstract}
+
+\begin{equation}
+L_{cls} = ylogf + (1-y)log(1-f)
+\end{equation}
+\begin{table*}[!htbp]
+\centering
+\begin{tabular}{c|c|c|c}
+\hline
+\multirow{2}*{Method}&Recall rate at 100 FP on FDDB&Speed&\multirow{2}*{Model Size}\\
+\cline{2-3}
+&Up\qquad Down\qquad Left\qquad Right\qquad Ave&CPU\qquad GPU\\
+\hline
+Divide-and-Conquer &85.5\qquad 85.2\qquad 85.5\qquad 85.6\qquad 85.5&15FPS\qquad 20FPS&2.2M\\
+Rotation Router &85.4\qquad 84.7\qquad 84.6\qquad 84.5\qquad 84.8 &12FPS\qquad 15FPS &2.5M\\
+Cascade CNN &85.0\qquad 84.2\qquad 84.7\qquad 85.8\qquad 84.9 &31FPS\qquad 67FPS &4.2M\\
+Cascade CNN &85.8\qquad 85.0\qquad 84.9\qquad 86.2\qquad 85.5 &16FPS\qquad 30FPS &4.7M\\
+SSD500 &86.3\qquad 86.5\qquad 85.5\qquad 86.1\qquad 86.1 &1FPS\qquad 20FPS &95M\\
+Faster R-CNN &84.2\qquad 82.5\qquad 81.9\qquad 82.1\qquad 82.7 &1FPS\qquad 20FPS &350M\\
+Faster R-CNN &87.0\qquad 86.5\qquad 85.2\qquad 86.1\qquad 86.2 &0.5FPS\qquad 10FPS &547M\\
+R-FCN &87.1\qquad 86.6\qquad 85.9\qquad 86.0\qquad 86.4 &0.8FPS\qquad 15FPS &123M\\
+\hline
+PCN (ours) &87.8\qquad 87.5\qquad 87.1\qquad 87.3\qquad 87.4\qquad &29FPS\qquad 63FPS &4.2M\\
+\hline
+\end{tabular}
+\caption{Speed and accuracy comparison between different methods. The FDDB recall rate (\%) is at 100 false positives.}
+\end{table*}
 
 \end{document}
