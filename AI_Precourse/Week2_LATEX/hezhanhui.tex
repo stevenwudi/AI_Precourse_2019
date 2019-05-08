@@ -1,0 +1,153 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\DeclareUnicodeCharacter{FB01}{fi}
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\usepackage{float}
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+%\ifcvprfinal\pagestyle{empty}\fi
+\setcounter{page}{4321}
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{\LaTeX\ Joint Training of Cascaded CNN for Face Detection}
+\iffalse
+\author{First Author\\
+Institution1\\
+Institution1 address\\
+{\tt\small firstauthor@i1.org}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Second Author\\
+Institution2\\
+First line of institution2 address\\
+{\tt\small secondauthor@i2.org}
+}
+\fi
+
+\author {Hongwei Qin   Junjie Yan   Xiu Li   Xiaolin Hu}
+
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+   Cascade has been widely used in face detection, where
+classifier with low computation cost can be firstly used to
+shrink most of the background while keeping the recall. The
+cascade in detection is popularized by seminal Viola-Jones
+framework and then widely used in other pipelines, such
+as DPM and CNN. However, to our best knowledge, most
+of the previous detection methods use cascade in a greedy
+manner, where previous stages in cascade are fixed when
+training a new stage. So optimizations of different CNNs are
+isolated. In this paper, we propose joint training to achieve
+end-to-end optimization for CNN cascade. We show that
+the back propagation algorithm used in training CNN can
+be naturally used in training CNN cascade. We present how
+jointly training can be conducted on naive CNN cascade
+and more sophisticated region proposal network (RPN) and
+fast R-CNN. Experiments on face detection benchmarks verify the advantages of the joint training
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+
+
+
+
+\iffalse
+
+\subsection{References}
+
+List and number all bibliographical references in 9-point Times,
+single-spaced, at the end of your paper. When referenced in the text,
+enclose the citation number in square brackets, for
+example~\cite{Authors14}.  Where appropriate, include the name(s) of
+editors of referenced books.
+\fi
+
+
+\section{ExperimentsofjointlytrainedfasterR-CNN }
+
+\makeatletter\def\@captype{table}\makeatother
+%\begin{table}
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+Benchmark & Separate & Joint\\
+\hline
+AFW & 97.0\% & 98.7\% \\
+\hline
+FDDB & 89.7\% & 91.2\% \\
+\hline
+\end{tabular}
+\end{center}
+\caption{ Comparison of training methods of RPN + F-RCNN }
+%\end{table}
+As shown in Table. 1, with our presented RPN + FRCNN (fast R-CNN) joint training pipeline, the AP (average precision) on AFW is 98.7\%, compared to the baseline result 97.0\% trainedwith4-stagetrainingmethodproposed in[21].
+OnFDDB,therecall(1000falsepositives)is 91.2\% and 89.7\%. For the F-RCNN branch, the ﬁnal joint training loss decreases 64\% compared to separate training. In joint RPN + F-RCNN, the detection results mostly have much higher conﬁdence scores than separate training results, which have lower conﬁdence scores because of FRCNN domination in convolution layers.
+
+
+%------------------------------------------------------------------------
+\section{Jointloss}
+ Each branch has a face v.s. non-face classfication loss and a bounding-box regression loss. Adding them with loss weights, we get the joint loss function:
+
+\begin{center}
+$L_{point} = \lambda_{1}L_{x12}+ \lambda_{2}L_{x24} + \lambda_{3}L_{x48}$
+\end{center}
+
+
+%------------------------------------------------------------------------
+\section{AFW results}
+\begin{figure}[H]
+\begin{center}
+%\fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+   \includegraphics[width=0.8\linewidth]{fig.png}
+\end{center}
+   \caption{Qualitative results of FaceCraft on AFW.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+ Examples of detection results are shown in Fig. 4. ~\cite{Alpher03} In our test results, non-frontal face bounding-box centred on the nose, which isconsistentwithourtrainingground-truthshowninFig.3. While in AFW ground-truth, nose is on the bounding-box edge ~\cite{Alpher02}. 
+\bibliographystyle{ieee_fullname}
+\bibliography{egbib}
+
+
+
+%------------------------------------------------------------------------
+\iffalse
+\section{Final copy}
+
+You must include your signed IEEE copyright release form when you submit
+your finished paper. We MUST have this form before your paper can be
+published in the proceedings.
+
+Please direct any questions to the production editor in charge of these
+proceedings at the IEEE Computer Society Press: Phone (714) 821-8380, or
+Fax (714) 761-1784.
+
+\fi
+
+
+
+\end{document}
