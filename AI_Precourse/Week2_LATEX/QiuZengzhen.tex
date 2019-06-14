@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}% 双栏包
+\usepackage{authblk}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{multirow}
+\geometry{a4paper,scale=0.85}   %设置页面的大小
+
+
+\title{Why and When Can Deep-but Not Shallow-networks
+Avoid the Curse of Dimensionality: A Review}                   %———总标题
+
+\author[1]{Tomaso Poggio}
+\author[2,3]{Hrushikesh Mhaskar}
+\author[1]{Lorenzo Rosasco}
+\tiny\affil[1]{Center for Brains, Minds, and Machines, McGovern Institute for Brain Research, Massachusetts Institute of Technology, Cambridge, MA 02139, USA }
+\tiny\affil[2]{Department of Mathematics, California Institute of Technology, Pasadena, CA 91125, USA }
+\tiny\affil[3]{Institute of Mathematical Sciences, Claremont Graduate University, Claremont, CA 91711, USA}
+\renewcommand*{\Affilfont}{\small\it} % 修改机构名称的字体与大小
+\begin{document}
+   \maketitle                                  % —— 显示标题
+\noindent\rule[0.25\baselineskip]{\textwidth}{1pt}
+\begin{abstract}
+\noindent%摘要无缩进
+The paper reviews and extends an emerging body of theoretical results on deep learning including the conditions under which it can be exponentially better than shallow learning. A class of deep convolutional networks represent an important special case of these conditions, though weight sharing is not the main reason for their exponential advantage. Implications of a few key theorems are discussed, together with new results, open problems and conjectures.
+
+\noindent
+\textbf{Keywords:} Abstract, \LaTeXe, English
+\end{abstract}
+\noindent\rule[0.25\baselineskip]{\textwidth}{1pt}
+ \begin{multicols}{2}
+  %双栏内容
+ \section{A theory of deep learning}
+ \subsection{Introduction}
+Face detection serves as an important component in computer vision systems which aim to extract information from face images. Practical applications, such as face recognition and face animation, all need to quickly and accurately detect faces on input images in advance. Same as many other vision tasks, the performance of face detection has been substantially improved by Convolutional Neural Network(CNN)\cite{Wright2009Robust}
+
+$ {f}(x)\approx P_{k}^* = \sum_{i=1}^r p_i (<\varpi_i,x>) $
+~\\
+~\\
+\begin{tabular}{|c|c|c|c|c|c|c|} %表格7列 全部居中显示
+\hline
+\multicolumn{7}{|c|}{Algorithm}\\  %横向合并7列单元格  两侧添加竖线
+\hline
+\multirow{4}*{performance }&50&0&100&200&300&300\\  %纵向合并4行单元格
+\cline{2-7}  %为第二列到第七列添加横线
+&100&100&0&100&200&200\\
+\cline{2-7}
+&150&200&100&0&100&200\\
+\cline{2-7}
+&200&300&200&100&0&300\\
+\hline
+\end{tabular}
+
+\end{multicols}
+\section{picture}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale=0.7]{picture.png}
+  \caption{picture}\label{1}
+\end{figure}
+% \string"文件路径\string".png}
+
+\bibliographystyle{plain}    
+\bibliography{bib}   
+
+\end{document}
